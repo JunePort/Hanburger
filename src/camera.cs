@@ -1,42 +1,50 @@
+// CameraShake.cs
 using UnityEngine;
 
 public class CameraShake : MonoBehaviour
 {
-    private Vector3 originalPosition;
-    private bool isShaking = false;
+    public static CameraShake Instance;
+
+    private float _shakeDuration = 0f;
+    private float _shakeMagnitude = 0.1f; // 控制晃动幅度（初始较小）
+    private float _shakeSpeed = 5f;       // 控制晃动频率
+
+    private Vector3 _originalPos;
+
+    void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
 
     void Start()
     {
-        originalPosition = transform.localPosition;
+        _originalPos = transform.localPosition;
     }
 
-    // 调用此方法开始晃动：duration 为持续时间（秒），magnitude 为晃动强度（单位：米）
-    public void Shake(float duration, float magnitude)
+    void Update()
     {
-        if (!isShaking)
+        if (_shakeDuration > 0)
         {
-            StartCoroutine(ShakeCoroutine(duration, magnitude));
+            transform.localPosition = _originalPos + Random.insideUnitSphere * _shakeMagnitude *
+                Mathf.Sin(_shakeSpeed * Time.time);
+            _shakeDuration -= Time.deltaTime;
+        }
+        else
+        {
+            _shakeDuration = 0f;
+            transform.localPosition = _originalPos;
         }
     }
 
-    System.Collections.IEnumerator ShakeCoroutine(float duration, float magnitude)
+    // 调用此方法触发晃动（例如出牌/上菜）
+    public void TriggerShake(float duration = 0.3f, float magnitude = 0.15f, float speed = 8f)
     {
-        isShaking = true;
-        float elapsed = 0f;
-
-        while (elapsed < duration)
-        {
-            float x = Random.Range(-1f, 1f) * magnitude;
-            float y = Random.Range(-1f, 1f) * magnitude;
-            float z = Random.Range(-1f, 1f) * magnitude;
-
-            transform.localPosition = originalPosition + new Vector3(x, y, z);
-
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        transform.localPosition = originalPosition;
-        isShaking = false;
+        // 参数调优建议：duration ≤ 0.4s, magnitude ≤ 0.2, 避免低频大幅晃动（易眩晕）
+        _shakeDuration = duration;
+        _shakeMagnitude = magnitude;
+        _shakeSpeed = speed;
     }
 }
