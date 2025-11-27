@@ -13,23 +13,23 @@ public class ShaderCode : MonoBehaviour
     {
         image = GetComponent<Image>();
 
-        m = new Material(image.material);// ¸´ÖÆImageµÄÔ­Ê¼²ÄÖÊ£¨´´½¨ÊµÀý£©£¬±ÜÃâÐÞ¸Ä¹²Ïí²ÄÖÊÓ°ÏìÆäËû¿¨Æ¬
+        m = new Material(image.material);// ï¿½ï¿½ï¿½ï¿½Imageï¿½ï¿½Ô­Ê¼ï¿½ï¿½ï¿½Ê£ï¿½ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ¬
         image.material = m;
 
         visual = GetComponentInParent<CardVisual>();
 
         string[] editions = new string[4];
-        editions[0] = "REGULAR";       // ÆÕÍ¨°æ
-        editions[1] = "POLYCHROME";    // ²ÊÉ«°æ£¨ÍÆ²â£©
-        editions[2] = "REGULAR";       // ÆÕÍ¨°æ£¨ÖØ¸´Ôö¼Ó¸ÅÂÊ£©
-        editions[3] = "NEGATIVE";      // ¸ºÆ¬°æ£¨ÍÆ²â£©
+        editions[0] = "REGULAR";       // ï¿½ï¿½Í¨ï¿½ï¿½
+        editions[1] = "POLYCHROME";    // ï¿½ï¿½É«ï¿½æ£¨ï¿½Æ²â£©
+        editions[2] = "REGULAR";       // ï¿½ï¿½Í¨ï¿½æ£¨ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½Ó¸ï¿½ï¿½Ê£ï¿½
+        editions[3] = "NEGATIVE";      // ï¿½ï¿½Æ¬ï¿½æ£¨ï¿½Æ²â£©
 
-        //½ûÓÃµ±Ç°²ÄÖÊÖÐËùÓÐÒÑÆôÓÃµÄ¹Ø¼ü×Ö£¨±ÜÃâ°æ±¾³åÍ»£©
+        //ï¿½ï¿½ï¿½Ãµï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÃµÄ¹Ø¼ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½æ±¾ï¿½ï¿½Í»ï¿½ï¿½
         for (int i = 0; i < image.material.enabledKeywords.Length; i++)
         {
             image.material.DisableKeyword(image.material.enabledKeywords[i]);
         }
-        //Ëæ»úÑ¡ÔñÒ»¸ö°æ±¾£¬²¢ÆôÓÃ¶ÔÓ¦µÄshader¹Ø¼ü×Ö£¨´¥·¢¸Ã°æ±¾µÄÊÓ¾õÐ§¹û£©
+        //ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½Ò»ï¿½ï¿½ï¿½æ±¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¶ï¿½Ó¦ï¿½ï¿½shaderï¿½Ø¼ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã°æ±¾ï¿½ï¿½ï¿½Ó¾ï¿½Ð§ï¿½ï¿½ï¿½ï¿½
         image.material.EnableKeyword("_EDITION_" + editions[Random.Range(0, editions.Length)]);
     }
 
