@@ -46,7 +46,7 @@ public class BookCardScore : MonoBehaviour
 
     public static void GOOD_CARD_PUBLIC(int LevelUp = 0)
     {
-        BookCardScore instance = Instance; // 获取唯一实例
+        BookCardScore instance = Instance; // 锟斤拷取唯一实锟斤拷
         Debug.Log("BookCardScore GOOD_CARD_PUBLIC");
         switch (LevelUp)
         {
@@ -61,22 +61,22 @@ public class BookCardScore : MonoBehaviour
 
     public void SetScoreGoal()
     {
-        Boss_Goal_Text.text = "目标" + (socre_percent == 1 ? " " : (socre_percent == 0.9f ? "(90%)" : "(80%)")) + ":" + ((int)(CardList.Instance.cardBoss.GetScoreGoal() * socre_percent)).ToString();
+        Boss_Goal_Text.text = "目锟斤拷" + (socre_percent == 1 ? " " : (socre_percent == 0.9f ? "(90%)" : "(80%)")) + ":" + ((int)(CardList.Instance.cardBoss.GetScoreGoal() * socre_percent)).ToString();
     }
 
     public async UniTask CarryScoreGoal(float currentscore)
     {
         if(currentscore >= (int)(CardList.Instance.cardBoss.GetScoreGoal() * socre_percent))
         {
-            Boss_Goal_Text.text = "营业顺利";
+            Boss_Goal_Text.text = "营业顺锟斤拷";
             await AnimateDollarRemoval(CardList.Instance.cardBoss.GetMoneyAward(), delayPerCoin: 0.1f);
             if (!GoodCardShop.Instance.isOpenedShop)
             {
                 await GoodCardMoney.Instance.Money_Add(CardList.Instance.cardBoss.GetMoneyAward());
-                BossAward_Text.text = "已领取";
+                BossAward_Text.text = "锟斤拷锟斤拷取";
             }
             await GoodCardMoney.Instance.Money_Interest();
-            //打开商店
+            //锟斤拷锟教碉拷
             FoodCardGroup.Instance.isStopGame = true;
             GoodCardShop.Instance.isSuccessfulDay = true;
             CardList.Instance.CleanFoodSaveCard();
@@ -84,10 +84,10 @@ public class BookCardScore : MonoBehaviour
         }
         else if (!CardList.Instance.cardBoss.CanUsePublishCard())
         {
-            Boss_Goal_Text.text = "营业失败";
+            Boss_Goal_Text.text = "营业失锟斤拷";
             await AnimateDollarRemoval(CardList.Instance.cardBoss.GetMoneyAward(), delayPerCoin: 0.1f);
-            BossAward_Text.text = "下次再来";
-            //打开商店
+            BossAward_Text.text = "锟铰达拷锟斤拷锟斤拷";
+            //锟斤拷锟教碉拷
             FoodCardGroup.Instance.isStopGame = true;
             GoodCardShop.Instance.isSuccessfulDay = false;
             CardList.Instance.CleanFoodSaveCard();
@@ -98,6 +98,7 @@ public class BookCardScore : MonoBehaviour
             SetScoreGoal();
         }
     }
+    // ==================== 锟斤拷锟斤拷锟斤拷锟斤拷 ====================
 
     private async UniTask AnimateDollarRemoval(int total, float delayPerCoin, CancellationToken ct = default)
     {
@@ -113,7 +114,6 @@ public class BookCardScore : MonoBehaviour
         }
     }
 
-    // ==================== 公共方法 ====================
 
     public void Pre_Score_And_Power(BookCard.CardType cardType, CardBoss bossCard = null)
     {
@@ -142,7 +142,7 @@ public class BookCardScore : MonoBehaviour
 
     public async UniTask BookCardType_LevelUp_OR_Down(BookCard card, bool isLevelUp = true, float time = 1.0f, CancellationToken ct = default)
     {
-        //请确保时在大于等级1的情况下调用，这个只是画面显示
+        //锟斤拷确锟斤拷时锟节达拷锟节等硷拷1锟斤拷锟斤拷锟斤拷碌锟斤拷茫锟斤拷锟斤拷只锟角伙拷锟斤拷锟斤拷示
         await ShowTextWithFade(score_Add_Text, (isLevelUp ? "+" : "-") + Mathf.Round(card.GetScore_LevelUp()).ToString(), time, ct);
         float current1 = float.TryParse(score_____Text.text, out var p) ? p : 0;
         score_____Text.text = (current1 + card.GetScore_LevelUp() * (isLevelUp ? 1 : -1)).ToString();
@@ -217,7 +217,7 @@ public class BookCardScore : MonoBehaviour
         await CarryScoreGoal(targetTotal);
     }
 
-    // ==================== 工具方法 ====================
+    // ==================== 锟斤拷锟竭凤拷锟斤拷 ====================
 
     private async UniTask AnimateTextValue(
         TMP_Text textComponent,
