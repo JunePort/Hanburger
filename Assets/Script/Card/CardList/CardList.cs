@@ -67,7 +67,7 @@ public class CardList : MonoBehaviour
     {
         if (Keyboard.current.qKey.wasPressedThisFrame)
         {
-            Debug.Log("°´ÏÂq¼ü__ÊÖ¶¯¼ÓÔØ");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½qï¿½ï¿½__ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½");
             ReadSaveCard();
             _ = SetBossStart_(cardBoss);
         }
@@ -96,7 +96,7 @@ public class CardList : MonoBehaviour
         cardSave.foodSavecards.Clear();
     }
 
-    #region ¶¯»­¹¤¾ß·½·¨
+    #region ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß·ï¿½ï¿½ï¿½
 
     private async UniTask ShowTextWithFadeInOnly(TMP_Text textComponent, string message, float duration = 0.4f, CancellationToken ct = default)
     {
@@ -107,14 +107,14 @@ public class CardList : MonoBehaviour
             canvasGroup = textComponent.gameObject.AddComponent<CanvasGroup>();
         }
 
-        // ±£´æÔ­Ê¼ÑÕÉ«ÓÃÓÚ¶¯»­Æðµã
+        // ï¿½ï¿½ï¿½ï¿½Ô­Ê¼ï¿½ï¿½É«ï¿½ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         _ = textComponent.color;
         textComponent.text = message;
         canvasGroup.alpha = 0f;
 
         float fadeTime = Mathf.Clamp(duration, 0.05f, 1f);
 
-        // µ÷ÓÃDoFade·½·¨
+        // ï¿½ï¿½ï¿½ï¿½DoFadeï¿½ï¿½ï¿½ï¿½
         await DoFade(canvasGroup, 0f, 1f, fadeTime, ct);
     }
 
@@ -122,15 +122,15 @@ public class CardList : MonoBehaviour
     {
         await UniTask.Create(async (token) =>
         {
-            // ´´½¨Í¸Ã÷¶È¶¯»­
+            // ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½È¶ï¿½ï¿½ï¿½
             var alphaTween = cg.DOFade(to, duration).From(from).SetEase(Ease.OutQuad);
-            // µÈ´ý¶¯»­Íê³É
+            // ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             while (alphaTween.IsActive() && !alphaTween.IsComplete())
             {
                 token.ThrowIfCancellationRequested();
                 await UniTask.Yield(token);
             }
-            // È¡Ïû´¦Àí£ºÖÕÖ¹¶¯»­
+            // È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½
             if (token.IsCancellationRequested)
             {
                 alphaTween.Kill();
